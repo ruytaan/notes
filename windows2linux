@@ -1,7 +1,7 @@
 @echo OFF
 for /F %%a IN (listIP.txt) do (
 echo COPY FILE TO SERVER %%a
-pscp.exe -pw @v0tochuc "C:\Program Files\PuTTY\checkpolicy.sh" root@%%a:/tmp/
+pscp.exe -pw 123123 "C:\Program Files\PuTTY\checkpolicy.sh" root@%%a:/tmp/
 echo ADD PERMISSION EXCUTE FOR FILES
 plink -pw @v0tochuc root@%%a "chmod +x /tmp/checkpolicy.sh"
 echo CHECKING
