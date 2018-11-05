@@ -1,0 +1,16 @@
+@echo OFF
+for /F %%a IN (listIP.txt) do (
+echo COPY FILE TO SERVER %%a
+pscp.exe -pw @v0tochuc "C:\Program Files\PuTTY\checkpolicy.sh" root@%%a:/tmp/
+echo ADD PERMISSION EXCUTE FOR FILES
+plink -pw @v0tochuc root@%%a "chmod +x /tmp/checkpolicy.sh"
+echo CHECKING
+plink -pw @v0tochuc root@%%a "/bin/bash /tmp/checkpolicy.sh > /tmp/result.txt"
+echo GET RESULT AUDIT FROM SERVER %%a
+pscp.exe -pw @v0tochuc root@%%a:/tmp/result.txt "C:\Users\TanHD\Desktop\result_%%a.txt"
+echo REMOVE FILES
+plink -pw @v0tochuc root@%%a "rm -rf /tmp/checkpolicy.sh"
+plink -pw @v0tochuc root@%%a "rm -rf /tmp/result.txt"
+echo ===========================================================================
+)
+pause
